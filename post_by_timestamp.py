@@ -43,6 +43,7 @@ def extract_code_snippets(posts_xml_path, output_path, batch, from_timestamp, to
                     print("Collecting " + str(post_count) + " snippets")
                     write_lines(year_range_post_list, output_path)
                     year_range_post_list.clear()
+        element.clear()
     write_lines(year_range_post_list, output_path)
     print("Collecting " + str(post_count) + " snippets")
 
