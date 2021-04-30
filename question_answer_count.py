@@ -1,5 +1,5 @@
 """
-Extract rows from snippets from the SO dump (Posts.xml) file filtered by year timestamp.
+Count the number of question and answers from the SO dump (Posts.xml) file filtered by year timestamp.
 """
 
 # Example snippets of Posts.xml
@@ -13,16 +13,7 @@ from datetime import datetime
 from xml.etree import ElementTree as ET
 
 
-def extract_rows(posts_xml_path, output_path, batch, from_timestamp, to_timestamp):
-    """
-    extract stackoverflow data dump to with a given time frame
-    :param posts_xml_path: SO Post.xml file path
-    :param output_path: output file path
-    :param batch: number of lines to write into the output file at once
-    :param from_timestamp: from_timestamp for instance, "2020-03-01T00:00:00.000"
-    :param to_timestamp: to_timestamp for instance, "2021-03-01T00:00:00.000"
-    :return: write the extracted post in output file in batch mode
-    """
+def process_rows(posts_xml_path, output_path, batch, from_timestamp, to_timestamp):
     xml_parser = ET.iterparse(posts_xml_path)
     from_timestamp = datetime.fromisoformat(from_timestamp)
     to_timestamp = datetime.fromisoformat(to_timestamp)
@@ -87,7 +78,7 @@ if __name__ == "__main__":
     firstLine = XML_DEFINITION + '\n' + OPENING_TAG + '\n'
     write_line(firstLine, year_post_output_path);
 
-    extract_rows(so_post_xml_path, year_post_output_path, batch_size, from_date, to_date)
+    extract_code_snippets(so_post_xml_path, year_post_output_path, batch_size, from_date, to_date)
 
     write_line(CLOSING_TAG, year_post_output_path)
     sys.exit()
